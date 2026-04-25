@@ -1,0 +1,15 @@
+version = "1"
+
+[site]
+kind = "static"
+domain = "hypermemetic.ai"
+zone_id = "a81fdc3125a732050ea621b5c7ccc531"
+
+[build]
+command = "npm run build"
+output_dir = "dist"
+install_command = "npm install"
+
+[deploy]
+project_name = "hypermemetic-tools"
+production_branch = "main"

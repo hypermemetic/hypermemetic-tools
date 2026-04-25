@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/global.css';
+
+const title = 'Hypermemetic / Tools';
+const description = 'Open-source infrastructure tools from Hypermemetic. Schema-driven RPC, multi-forge git management, multi-tenant deploy platform.';
+
+const tools = [
+  {
+    name: 'plexus',
+    version: 'v0.4',
+    status: 'active',
+    tagline: 'Schema-driven RPC framework for distributed systems.',
+    body: 'Define methods in code. Get JSON Schema, JSON-RPC over WebSocket or stdio, streaming responses, and a typed client surface — without hand-writing serializers, validators, or transport glue. Rust + Haskell. Activations compose into hubs; hubs nest into namespaces; every method is introspectable at runtime.',
+    languages: 'Rust · Haskell',
+    repo: 'https://github.com/hypermemetic/plexus',
+  },
+  {
+    name: 'synapse',
+    version: 'v3.10',
+    status: 'stable',
+    tagline: 'Algebraic CLI for plexus services.',
+    body: 'Talk to any plexus service from the shell. Per-method flags derived from the schema; navigate hubs and child activations; fetch the IR for code generation. No manual flag-parsing per backend, no JSON blobs to hand-craft. On Hackage.',
+    languages: 'Haskell',
+    repo: 'https://github.com/hypermemetic/plexus-synapse',
+  },
+  {
+    name: 'hyperforge',
+    version: 'v4.1',
+    status: 'stable',
+    tagline: 'Manage repos across GitHub, Codeberg, and GitLab as one workspace.',
+    body: 'Mirror state across forges. Bulk sync, push, init. Workspace-level operations: dependency-graph builds, version bumps in dependency order, package publishing. Container-image and release-artifact CRUD against forge registries. v5 is in development with a cleaner namespace split and an embedded secrets RPC surface.',
+    languages: 'Rust',
+    repo: 'https://github.com/hypermemetic/hyperforge',
+  },
+  {
+    name: 'hypermemetic-platform',
+    version: 'v0.1',
+    status: 'early',
+    tagline: 'Multi-tenant Plexus RPC service for onboarding clients and shipping their sites.',
+    body: 'Tenancy, secrets, DNS, sites, backends — typed RPC surfaces over Cloudflare, Hetzner, Logto, Infisical. A repo with .hyperforge/platform.toml deploys itself: build runs locally, output uploads to Cloudflare Pages direct-upload, DNS wires automatically. This page is hosted through it.',
+    languages: 'Rust',
+    repo: 'https://github.com/hypermemetic/hypermemetic-infra',
+  },
+];
+---
+<Base title={title} description={description}>
+  <main class="page">
+    <div class="head">
+      <a href="/" class="domain">hypermemetic.ai</a>
+      <span class="label">/ tools</span>
+    </div>
+
+    <section class="intro">
+      <h1>Open-source infrastructure tools.</h1>
+      <p>
+        Public ones are listed here; clients use the same code, the same
+        servers, the same CLIs. Everything below is OSS, runnable on your
+        own box, and extracted from real engagements.
+      </p>
+    </section>
+
+    <section class="tools" aria-label="Tools">
+      {tools.map((tool) => (
+        <article class="tool">
+          <header class="tool-head">
+            <h2 class="tool-name">{tool.name}</h2>
+            <span class="tool-version">{tool.version}</span>
+          </header>
+          <p class="tool-tagline">{tool.tagline}</p>
+          <div class="tool-body">
+            <p>{tool.body}</p>
+          </div>
+          <div class="tool-meta">
+            <span class={`tag ${tool.status}`}>{tool.status}</span>
+            <span>{tool.languages}</span>
+            <a href={tool.repo}>{tool.repo.replace('https://', '')}</a>
+          </div>
+        </article>
+      ))}
+    </section>
+
+    <footer class="footer">
+      <span>
+        <a href="mailto:hypermemetic@proton.me">hypermemetic@proton.me</a>
+      </span>
+      <span>
+        Working with these? &nbsp;
+        <a href="https://c2c.hypermemetic.ai">c2c.hypermemetic.ai</a>
+      </span>
+    </footer>
+  </main>
+</Base>
